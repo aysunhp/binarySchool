@@ -3,7 +3,7 @@ main {
   width: 100%;
   min-height: 100vh;
   .tracker {
-    width: 50%;
+    width: 600px;
     display: flex;
     justify-content: start;
     flex-direction: column;
@@ -14,7 +14,7 @@ main {
       margin: 0px;
       .tracker-header {
         h2 {
-          margin-bottom: 30px;
+          margin-bottom: 40px;
         }
       }
       .tracker-balance {
@@ -29,12 +29,12 @@ main {
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
           rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         display: flex;
+        justify-content: space-between;
         padding: 30px;
         margin-bottom: 50px;
         border-radius: 5px;
 
         .income {
-          border-right: 1px solid lightgray;
           padding: 0px 30px;
           text-transform: uppercase;
           line-height: 24px;
@@ -67,6 +67,8 @@ main {
           margin-bottom: 15px;
         }
         .items {
+          max-height: 150px;
+          overflow-y: scroll;
           .history-item {
             margin-bottom: 10px;
             display: flex;

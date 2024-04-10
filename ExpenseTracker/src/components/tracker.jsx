@@ -8,6 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { v4 as uuidv4 } from "uuid";
 import Swal from "sweetalert2";
 import Box from "@mui/material/Box";
+import Divider from '@mui/joy/Divider';
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
@@ -25,10 +26,12 @@ const style = {
 
 const Tracker = () => {
   const [history, setHistory] = useState([]);
-  const [newTr, setNewTr] = useState({ title: "", amount: 0 });
-  const [income, setIncome] = useState(0);
-  const [expense, setExpense] = useState(0);
+  const [newTr, setNewTr] = useState({ title: "", amount: "" });
+  const [income, setIncome] = useState([]);
+  const [expense, setExpense] = useState([]);
   const [balance, setBalance] = useState(0);
+  const [incomeBalance, setIncomeBalance] = useState(0);
+  const [expenseBalance, setExpenseBalance] = useState(0);
   const [open, setOpen] = React.useState(false);
   const [edited, setEdited] = React.useState({});
 
@@ -36,7 +39,7 @@ const Tracker = () => {
   const handleClose = () => setOpen(false);
 
   const handleClick = () => {
-    if (balance + newTr.amount < 0) {
+    if (balance + Number(newTr.amount) < 0 ) {
       Swal.fire({
         title: "Error!",
         text: "You do not have enough money!",
@@ -44,70 +47,115 @@ const Tracker = () => {
         confirmButtonText: "Cool",
       });
     } else {
-      const updatedHistory = [...history, { ...newTr, id: uuidv4() }];
+      const obj={ ...newTr, id: uuidv4() }
+      const updatedHistory = [...history, obj];
       setHistory(updatedHistory);
+
       let historySum = 0;
       updatedHistory.forEach((item) => {
-        historySum += item.amount;
+        historySum += Number(item.amount);
       });
       setBalance(historySum);
 
-      if (newTr.amount < 0) {
-        setExpense((prev) => prev + newTr.amount);
-      } else {
-        setIncome((prev) => prev + newTr.amount);
+      if(obj.amount.includes("-")){
+        const updatedExpense = [...expense, obj];
+        setExpense(updatedExpense)
+
+        let expenseSum = 0;
+        updatedExpense.forEach((item) => {
+          expenseSum+= Number(item.amount);
+        });
+        setExpenseBalance(expenseSum)
+
+      }else{
+        const updatedIncome = [...income, obj];
+        setIncome(updatedIncome)
+
+        let incomeSum = 0;
+        updatedIncome.forEach((item) => {
+          incomeSum += Number(item.amount);
+        });
+        setIncomeBalance(incomeSum)
+
       }
 
-      setNewTr({ title: "", amount: 0 });
+      setNewTr({ title: "", amount: "" });
     }
   };
 
   const handleDelete = (id) => {
     const found = history.find((item) => item.id == id);
     const updatedHistory = history.filter((item) => item.id != id);
-    // if(found.amount>0){
-    //     const updatedIncome=income-found.amount;
-    //     const updatedBalance=balance-found.amount;
-    //     setIncome(updatedIncome)
-    //     setBalance(updatedBalance)
-    // }else{
-    //     const updatedExpense=expense-found.amount;
-    //     const updatedBalance=balance-found.amount;
-    //     setExpense(updatedExpense)
-    //     setBalance(updatedBalance)
-    // }
-    setHistory(updatedHistory);
+
+    if(balance-Number(found.amount)>=0){
+      const updatedBalance=balance-Number(found.amount);
+      setBalance(updatedBalance)
+  
+      if(!found.amount.includes("-")){
+          const updatedIncomeBalance=incomeBalance-Number(found.amount);
+          const updatedIncome= income.filter((item) => item.id != id);
+  
+          setIncomeBalance(updatedIncomeBalance)
+          setIncome(updatedIncome)
+      }else{
+          const updatedExpenseBalance=expenseBalance-Number(found.amount);
+          const updatedExpense= expense.filter((item) => item.id != id);
+  
+          setExpenseBalance(updatedExpenseBalance)
+          setExpense(updatedExpense)
+  
+      }
+      setHistory(updatedHistory);
+    }else{
+      Swal.fire({
+        title: "Error!",
+        text: "Something is gone wrong!",
+        icon: "error",
+        confirmButtonText: "Cool",
+      });
+    }
+
+   
   };
 
   const handleEdit = (id) => {
     const found = history.find((item) => item.id == id);
     setEdited(found)
     setOpen(true);
- 
   };
 
   const handleEditClick = () => {
     let found=history.find(item=>item.id==edited.id)
+
+   if( balance + Number(edited.amount)>=0){
     const updatedHistory = history.map((item) =>
-      item.id === edited.id ? edited : item
-    );
-    setHistory(updatedHistory);
-console.log(edited,"edit")
-console.log(newTr,"new")
-     const updatedBalance = balance - found.amount + edited.amount;
-      setBalance(updatedBalance);
+    item.id === edited.id ? edited : item
+  );
+  setHistory(updatedHistory);
 
-    if (edited.amount < 0) {
-      setExpense((prev) => prev - found.amount + edited.amount);
-    
-    } else {
+   const updatedBalance = balance - Number(found.amount) + Number(edited.amount);
+   setBalance(updatedBalance);
 
-      setIncome((prev) => prev - found.amount + edited.amount);
-     
-    }
+   let updatedExpenseBalance =0
+   updatedHistory.forEach(item=>item.amount.includes("-")?updatedExpenseBalance+=Number(item.amount):null)
 
-    setEdited({});
-    setOpen(false);
+   let updatedIncomeBalance =0
+   updatedHistory.forEach(item=>!item.amount.includes("-")?updatedIncomeBalance+=Number(item.amount):null)
+
+   setExpenseBalance(updatedExpenseBalance);
+   setIncomeBalance(updatedIncomeBalance);
+
+  setEdited({});
+
+   }else{
+    Swal.fire({
+      title: "Error!",
+      text: "Something is gone wrong!",
+      icon: "error",
+      confirmButtonText: "Cool",
+    });
+   }
+   setOpen(false);
   };
 
   return (
@@ -125,12 +173,13 @@ console.log(newTr,"new")
             <div className="income">
               <span>Income</span>
               <br />
-              <span className="income-amount">{income}</span>
+              <span className="income-amount">{incomeBalance}</span>
             </div>
+            <Divider orientation="vertical" />
             <div className="expence">
-              <span>expense</span>
+              <span>Expense</span>
               <br />
-              <span className="expence-amount">{-expense}</span>
+              <span className="expence-amount">{expenseBalance}</span>
             </div>
           </div>
           <div className="history">
@@ -184,6 +233,7 @@ console.log(newTr,"new")
               label=""
               value={newTr.title}
               variant="outlined"
+              placeholder="Enter title..."
               onChange={(e) => {
                 setNewTr((prev) => ({
                   ...prev,
@@ -196,19 +246,16 @@ console.log(newTr,"new")
             <p>(negative - expence , positive - income)</p>
 
             <TextField
-              id="outlined-number"
-              label=""
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onChange={(e) => {
-                setNewTr((prev) => ({
-                  ...prev,
-                  amount: parseFloat(e.target.value),
-                }));
-              }}
-            />
+                id="outlined-basic"
+                label=""
+                value={newTr.amount}
+                variant="outlined"
+              placeholder="Enter amount..."
+                onChange={(e) =>
+                  setNewTr((prev) => ({ ...prev, amount: e.target.value}))
+                }
+                style={{marginBottom:"20px"}}
+              />
 
             <Button variant="contained" className="btn" onClick={handleClick}>
               Add Transaction
@@ -221,7 +268,7 @@ console.log(newTr,"new")
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography variant="h6" component="h2">
+              <Typography variant="h6" component="h2" style={{marginBottom:"20px"}}>
                 Update Transaction
               </Typography>
               <Typography>Enter new text</Typography>
@@ -233,28 +280,25 @@ console.log(newTr,"new")
                 onChange={(e) =>
                   setEdited((prev) => ({ ...prev, title: e.target.value }))
                 }
+                style={{marginBottom:"20px"}}
               />
               <br />
               <Typography>Enter new amount</Typography>
               <TextField
-                id="outlined-number"
+                id="outlined-basic"
                 label=""
-                type="number"
                 value={edited.amount}
-                InputLabelProps={{
-                  shrink: true,
-                }}
+                variant="outlined"
                 onChange={(e) =>
-                  setEdited((prev) => ({
-                    ...prev,
-                    amount: parseFloat(e.target.value),
-                  }))
+                  setEdited((prev) => ({ ...prev, amount: e.target.value }))
                 }
+                style={{marginBottom:"20px"}}
               />
               <Button
                 variant="contained"
                 className="btn"
                 onClick={handleEditClick}
+                style={{width:"68%"}}
               >
                 Update Transaction
               </Button>
