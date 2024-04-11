@@ -1,0 +1,107 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.calculator-wrapper {
+  width: 380px;
+  border: 1px solid lightgray;
+  border-radius: 25px;
+  height: 80vh;
+  background-color: #f7f7f7;
+  //   background-color: #2a2b2c;
+
+  position: relative;
+  .buttons-wrapper {
+    width: 100%;
+    height: 60%;
+    border-radius: 25px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 30px;
+    display: flex;
+    gap: 25px;
+
+    background: linear-gradient(
+      45deg,
+      hsla(215, 65%, 84%, 1) 12%,
+      hsla(206, 67%, 91%, 1) 53%,
+      hsla(200, 96%, 78%, 1) 92%
+    );
+    // background: linear-gradient(
+    //   45deg,
+    //   hsla(209, 71%, 14%, 1) 18%,
+    //   hsla(204, 49%, 15%, 1) 31%,
+    //   hsla(200, 100%, 34%, 1) 100%
+    // );
+
+    .buttons-right-side {
+      flex: 3;
+      height: 100%;
+      width: 50px;
+      background-color: #aedffeb7;
+      opacity: 0.6;
+    }
+    .buttons-left-side {
+      flex: 9;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+
+      .special-buttons-side {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 30px;
+        background-color: #d6ebf9;
+        padding: 15px;
+        .clear-btn,
+        .change-btn,
+        .percentage-btn {
+          font-weight: 900;
+          font-size: 20px;
+          background-color: #d6ebf9;
+        }
+      }
+      .number-buttons-side {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 25px;
+        flex-wrap: wrap;
+
+        .box {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: space-between;
+          gap: 25px;
+        }
+        .box-1,
+        .box-2,
+        .box-3,
+        .box-4,
+        .box-5,
+        .box-6,
+        .box-7,
+        .box-8,
+        .box-9,
+        .box-point,
+        .box-0,
+        .box-00 {
+          flex: 4;
+          //   padding-left: 20px;
+          font-size: 20px;
+          font-weight: 900;
+          padding: 15px;
+          border-radius: 50%;
+          text-align: center;
+          background-color: #beddfb;
+        }
+      }
+    }
+  }
+}

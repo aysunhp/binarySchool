@@ -1,0 +1,9 @@
+*{
+  margin:0px;
+  padding:0px;
+  box-sizing:border-box;
+  background-color: #e5e5e5;
+}
+ul li{
+  list-style:none;
+}
