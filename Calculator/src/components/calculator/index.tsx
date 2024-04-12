@@ -6,11 +6,11 @@ import ModeChanger from "../modeChanger";
 import HistoryButton from "../historyButton";
 import CustomDrawer from "../customDrawer";
 import OperationButtons from "../operationButtons";
+import OperationResultSection from "../operationResultSection";
 
 const Calculator = () => {
   const dispatch: AppDispatch = useDispatch();
   const mode = useSelector((state: RootState) => state.calc.mode);
-
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = e.currentTarget;
     console.log(name);
@@ -24,6 +24,8 @@ const Calculator = () => {
           className="calculator-wrapper"
           style={{ backgroundColor: mode ? "#f7f7f7" : "#2a2b2c" }}
         >
+          <ModeChanger />
+          <OperationResultSection />
           <div
             className="buttons-wrapper"
             style={{
@@ -48,14 +50,18 @@ const Calculator = () => {
                     AC
                   </button>
                   <button
+                    name="-"
                     className="change-btn"
                     style={{ color: mode ? "#373737" : "white" }}
+                    onClick={handleClick}
                   >
                     +/-
                   </button>
                   <button
+                    name="%"
                     className="percentage-btn"
                     style={{ color: mode ? "#373737" : "white" }}
+                    onClick={handleClick}
                   >
                     %
                   </button>
@@ -173,6 +179,7 @@ const Calculator = () => {
                       backgroundColor: mode ? "#d1e6face" : "#0d2337c2",
                       color: mode ? "#373737" : "white",
                     }}
+                    onClick={handleClick}
                   >
                     .
                   </button>
@@ -194,6 +201,7 @@ const Calculator = () => {
                       backgroundColor: mode ? "#d1e6face" : "#0d2337c2",
                       color: mode ? "#373737" : "white",
                     }}
+                    onClick={handleClick}
                   >
                     00
                   </button>
@@ -202,7 +210,7 @@ const Calculator = () => {
             </div>
             <OperationButtons />
           </div>
-          <ModeChanger />
+
           <HistoryButton />
           <CustomDrawer />
         </div>

@@ -9,7 +9,8 @@ interface History {
 export interface CalcState {
     mode: boolean,
     open:boolean,
-    history: History[]
+    history: History[],
+    lastOperation:string,
     operation:string,
   result: number
 }
@@ -24,6 +25,7 @@ const initialState: CalcState = {
     mode: parsedMode,
     open:false,
     history: parsedHistory,
+    lastOperation:"",
     operation: "",
     result: 0,
 }
@@ -32,17 +34,18 @@ export const calcSlice = createSlice({
   name: 'calculator',
   initialState,
   reducers: {
-    changeMode: (state, action: PayloadAction<boolean>) => {
+      changeMode: (state, action: PayloadAction<boolean>) => {
         state.mode= action.payload;
         localStorage.setItem("mode",JSON.stringify(state.mode))
       },
       toggleDrawer:(state, action: PayloadAction<boolean>) => {
         state.open= action.payload
       },
-    addText: (state, action: PayloadAction<string>) => {
-      state.operation += action.payload
+      addText: (state, action: PayloadAction<string>) => {
+        state.result=0;
+      state.operation +=action.payload
     },
-    toCalculate: (state)=>{
+      toCalculate: (state)=>{
         try {
             state.result = evaluate(state.operation);
           
@@ -55,6 +58,7 @@ export const calcSlice = createSlice({
             if (state.history.length > 5) {
               state.history.shift();
             }
+            state.lastOperation=state.operation;
             state.operation = "";
             localStorage.setItem("history", JSON.stringify(state.history))
           } catch (error) {
@@ -63,11 +67,12 @@ export const calcSlice = createSlice({
           }
 
     },
-    resetCalculate:(state)=>{
+      resetCalculate:(state)=>{
         state.operation="";
+        state.lastOperation="",
         state.result=0;
-    },
-    clearHistory:(state)=>{
+      },
+     clearHistory:(state)=>{
         state.history=[];
        localStorage.setItem("history", JSON.stringify([]))
     }

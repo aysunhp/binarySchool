@@ -191,4 +191,37 @@ main {
       }
     }
   }
+  .operation-result-view-sect {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: transparent;
+    margin-top: 15px;
+    height: 190px;
+    width: 100%;
+
+    .operation-after-result {
+      font-size: 17px;
+      text-align: right;
+      margin-bottom: 15px;
+      font-weight: 500;
+      background-color: transparent;
+      color: #939393;
+    }
+
+    .operation-result {
+      background-color: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      font-size: 24px;
+      font-weight: 800;
+
+      .equal-to,
+      .result {
+        background-color: transparent;
+      }
+    }
+  }
 }
