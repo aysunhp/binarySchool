@@ -22,38 +22,6 @@ main {
     display: flex;
     gap: 25px;
 
-    .buttons-right-side {
-      flex: 2.3;
-      height: 100%;
-      width: 50px;
-      // burda buttonlarin rengi deyismesiiii
-
-      // background-color: #cbeaffc0;
-      // background-color: #12374cc5;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      // gap: 20px;
-      border-radius: 30px;
-      .division-btn,
-      .multiplication-btn,
-      .subtraction-btn,
-      .addition-btn,
-      .calculation-btn {
-        padding: 18px;
-        border-radius: 50%;
-        text-align: center;
-        font-size: 20px;
-        font-weight: 900;
-        background-color: transparent;
-      }
-      .calculation-btn {
-        // burda buttonlarin rengi deyismesiiii
-
-        background-color: #e7f3ffb4;
-      }
-    }
     .buttons-left-side {
       flex: 9;
       background-color: transparent;
@@ -105,122 +73,10 @@ main {
           padding: 15px;
           border-radius: 50%;
           text-align: center;
-          // burda buttonlarin rengi deyismesiiii
           background-color: #d6e9fc;
           background-color: #0d2337c2;
           color: white;
         }
-      }
-    }
-  }
-
-  .mode-changer {
-    width: 130px;
-    border-radius: 40px;
-    display: flex;
-    justify-content: space-between;
-    margin: auto;
-    background-color: #a9dcfd;
-    .light {
-      padding: 5px 20px 5px 20px;
-      border-radius: 40px;
-    }
-    .dark {
-      padding: 5px 20px 5px 15px;
-      border-radius: 40px;
-      svg {
-        width: 30px;
-        height: 30px;
-        font-weight: normal;
-      }
-    }
-  }
-  .last-opataretions-btn {
-    width: 22px;
-    height: 22px;
-    position: absolute;
-    top: 42px;
-    right: 30px;
-  }
-
-  .custom-drawer {
-    width: 65%;
-    height: 32vh;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    border-radius: 25px;
-    border-bottom-right-radius: 0px;
-    border-top-left-radius: 0px;
-    padding: 20px;
-
-    .close-btn {
-      position: fixed;
-      background-color: transparent;
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-    .clear-history-btn {
-      background-color: transparent;
-      position: fixed;
-      margin-top: 235px;
-      margin-left: 0px;
-    }
-    .history-items {
-      padding-right: 10px;
-      max-height: 230px;
-      background-color: transparent;
-      overflow-y: scroll;
-      scroll-behavior: smooth;
-      .item {
-        text-align: right;
-        margin-bottom: 13px;
-        background-color: transparent;
-        p {
-          margin-bottom: 5px;
-          font-size: 16px;
-          background-color: transparent;
-          color: orangered;
-        }
-        span {
-          font-size: 19px;
-          background-color: transparent;
-        }
-      }
-    }
-  }
-  .operation-result-view-sect {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background-color: transparent;
-    margin-top: 15px;
-    height: 190px;
-    width: 100%;
-
-    .operation-after-result {
-      font-size: 17px;
-      text-align: right;
-      margin-bottom: 15px;
-      font-weight: 500;
-      background-color: transparent;
-      color: #939393;
-    }
-
-    .operation-result {
-      background-color: transparent;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      font-size: 24px;
-      font-weight: 800;
-
-      .equal-to,
-      .result {
-        background-color: transparent;
       }
     }
   }

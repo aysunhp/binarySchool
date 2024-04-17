@@ -1,4 +1,4 @@
-import "../calculator/calculator.scss";
+import "./operationButtons.scss";
 import { addText, toCalculate } from "../../redux/slice/calcSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store/calc";
@@ -9,7 +9,11 @@ const OperationButtons = () => {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = e.currentTarget;
-    dispatch(addText(name));
+    let obj = {
+      type: "operation",
+      name: name,
+    };
+    dispatch(addText(obj));
   };
 
   return (

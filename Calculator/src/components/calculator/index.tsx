@@ -11,10 +11,15 @@ import OperationResultSection from "../operationResultSection";
 const Calculator = () => {
   const dispatch: AppDispatch = useDispatch();
   const mode = useSelector((state: RootState) => state.calc.mode);
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = e.currentTarget;
-    console.log(name);
-    dispatch(addText(name));
+    let obj = {
+      type: "number",
+      name: name,
+    };
+
+    dispatch(addText(obj));
   };
 
   return (

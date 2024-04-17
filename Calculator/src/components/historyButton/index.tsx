@@ -1,4 +1,4 @@
-import "../calculator/calculator.scss";
+import "./hostoryButton.scss";
 import { toggleDrawer } from "../../redux/slice/calcSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store/calc";

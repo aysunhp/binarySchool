@@ -1,24 +1,11 @@
-import "./../calculator/calculator.scss";
-import {
-  changeMode,
-  //   toggleDrawer,
-  //   addText,
-  //   toCalculate,
-  //   resetCalculate,
-  //   clearHistory,
-} from "../../redux/slice/calcSlice";
+import "./modeChanger.scss";
+import { changeMode } from "../../redux/slice/calcSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store/calc";
 
 const ModeChanger = () => {
   const dispatch: AppDispatch = useDispatch();
   const mode = useSelector((state: RootState) => state.calc.mode);
-
-  //   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //     const { name } = e.currentTarget;
-  //     console.log(name);
-  //     dispatch(addText(name));
-  //   };
 
   return (
     <div

@@ -1,4 +1,4 @@
-import "../calculator/calculator.scss";
+import "./clearHistoryButton.scss";
 import { clearHistory } from "../../redux/slice/calcSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store/calc";

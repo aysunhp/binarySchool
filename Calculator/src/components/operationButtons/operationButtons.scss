@@ -1,0 +1,24 @@
+.buttons-right-side {
+  flex: 2.3;
+  height: 100%;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 30px;
+  .division-btn,
+  .multiplication-btn,
+  .subtraction-btn,
+  .addition-btn,
+  .calculation-btn {
+    padding: 18px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    background-color: transparent;
+  }
+  .calculation-btn {
+    background-color: #e7f3ffb4;
+  }
+}

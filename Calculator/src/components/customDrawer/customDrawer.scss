@@ -1,0 +1,42 @@
+.custom-drawer {
+  width: 65%;
+  height: 32vh;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 25px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 0px;
+  padding: 20px;
+
+  .close-btn {
+    position: fixed;
+    background-color: transparent;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .history-items {
+    padding-right: 10px;
+    max-height: 230px;
+    background-color: transparent;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    .item {
+      text-align: right;
+      margin-bottom: 13px;
+      background-color: transparent;
+      p {
+        margin-bottom: 5px;
+        font-size: 16px;
+        background-color: transparent;
+        color: orangered;
+      }
+      span {
+        font-size: 19px;
+        background-color: transparent;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import "../calculator/calculator.scss";
+import "./customDrawer.scss";
 import { toggleDrawer } from "../../redux/slice/calcSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store/calc";
@@ -7,7 +7,7 @@ import ClearHistoryButton from "../clearHistoryButton";
 const CustomDrawer = () => {
   const dispatch: AppDispatch = useDispatch();
   const mode = useSelector((state: RootState) => state.calc.mode);
-  const open = useSelector((state: RootState) => state.calc.open);
+  const toggle = useSelector((state: RootState) => state.calc.toggle);
   const history = useSelector((state: RootState) => state.calc.history);
 
   return (
@@ -16,7 +16,7 @@ const CustomDrawer = () => {
       style={{
         backgroundColor: mode ? "#f7f7f7" : "#2a2b2c",
         color: mode ? "#373737" : "white",
-        display: open ? "block" : "none",
+        display: toggle ? "block" : "none",
       }}
     >
       <div

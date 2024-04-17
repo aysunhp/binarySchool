@@ -1,4 +1,4 @@
-import "../calculator/calculator.scss";
+import "./operationResult.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store/calc";
 

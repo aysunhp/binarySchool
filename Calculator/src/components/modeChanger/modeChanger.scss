@@ -1,0 +1,21 @@
+.mode-changer {
+  width: 130px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  background-color: #a9dcfd;
+  .light {
+    padding: 5px 20px 5px 20px;
+    border-radius: 40px;
+  }
+  .dark {
+    padding: 5px 20px 5px 15px;
+    border-radius: 40px;
+    svg {
+      width: 30px;
+      height: 30px;
+      font-weight: normal;
+    }
+  }
+}
